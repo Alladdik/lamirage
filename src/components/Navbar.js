@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -52,6 +52,7 @@ const NavItems = styled.ul`
   @media (max-width: 768px) {
     flex-direction: column;
     width: 100%;
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   }
 `;
 
@@ -141,23 +142,33 @@ const MenuToggle = styled.div`
     right: 20px;
   }
 `;
+
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   return (
     <Nav>
       <NavContainer>
         <Link to="/">
           <Logo src="/logo.PNG" alt="La Mirage Studio Logo" />
         </Link>
-        <MenuToggle onClick={toggleMenu}>
-          {isMenuOpen ? '✕' : '☰'}
-        </MenuToggle>
-        <NavItems style={{ display: isMenuOpen ? 'flex' : 'none' }}>
+        {windowWidth <= 768 && (
+          <MenuToggle onClick={toggleMenu}>
+            {isMenuOpen ? '✕' : '☰'}
+          </MenuToggle>
+        )}
+        <NavItems isOpen={isMenuOpen || windowWidth > 768}>
           <NavItem>
             <NavLink 
               to="/" 
