@@ -9,7 +9,11 @@ import Contact from './components/Contact';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
-  padding-top: 80px; // Щоб контент не перекривався з Navbar
+  padding-top: 80px; // Забезпечує відступ для фіксованого Navbar
+
+  @media (max-width: 768px) {
+    padding-top: 100px; // Збільшуємо відступ для мобільних пристроїв
+  }
 `;
 
 function App() {
