@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Massages from './components/Massages';
+import Courses from './components/Courses';
+import YoniMassage from './components/YoniMassage';
+import Contact from './components/Contact';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+  padding-top: 80px; // Щоб контент не перекривався з Navbar
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <AppContainer>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/massages" element={<Massages />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/yoni-massage" element={<YoniMassage />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </AppContainer>
+    </Router>
   );
 }
 
 export default App;
+
