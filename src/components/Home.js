@@ -5,6 +5,7 @@ const fadeIn = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
+
 const HomeContainer = styled.div`
   text-align: center;
   padding: 40px;
@@ -17,6 +18,10 @@ const HomeContainer = styled.div`
   background-size: cover;
   background-position: center;
   color: #fff;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const Content = styled.div`
@@ -24,13 +29,23 @@ const Content = styled.div`
   padding: 30px;
   border-radius: 15px;
   max-width: 800px;
+  width: 90%;
   animation: ${fadeIn} 1s ease-in;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    width: 95%;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 20px;
   color: #ff6600;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const ProfileImage = styled.img`
@@ -39,12 +54,21 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   margin-bottom: 20px;
   border: 3px solid #ff6600;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
 `;
 
 const Description = styled.p`
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Highlight = styled.span`
@@ -57,7 +81,12 @@ const ClientCount = styled.div`
   font-weight: bold;
   color: #ff6600;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
 `;
+
 const Home = () => {
   return (
     <HomeContainer>
@@ -82,3 +111,4 @@ const Home = () => {
 };
 
 export default Home;
+

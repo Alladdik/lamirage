@@ -18,6 +18,10 @@ const ContactContainer = styled.div`
   background-size: cover;
   background-position: center;
   color: #fff;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const Content = styled.div`
@@ -25,14 +29,24 @@ const Content = styled.div`
   padding: 30px;
   border-radius: 15px;
   max-width: 800px;
+  width: 100%;
   text-align: center;
   animation: ${fadeIn} 1s ease-in;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 30px;
   color: #ff6600;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
 `;
 
 const ContactInfo = styled.div`
@@ -40,11 +54,17 @@ const ContactInfo = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const ContactItem = styled.a`
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 15px 25px;
   background: linear-gradient(45deg, #ff6600, #ff8533);
   color: white;
@@ -53,6 +73,7 @@ const ContactItem = styled.a`
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  font-size: 1rem;
 
   &:hover {
     transform: translateY(-5px);
@@ -62,6 +83,11 @@ const ContactItem = styled.a`
   svg {
     margin-right: 10px;
     font-size: 1.2em;
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px 20px;
+    font-size: 0.9rem;
   }
 `;
 
@@ -75,6 +101,12 @@ const CopyMessage = styled.div`
   padding: 15px;
   border-radius: 5px;
   animation: ${fadeIn} 0.3s ease-in;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    width: 80%;
+    text-align: center;
+  }
 `;
 
 const Contact = () => {

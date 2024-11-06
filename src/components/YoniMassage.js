@@ -5,6 +5,7 @@ const fadeIn = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
+
 const YoniMassageContainer = styled.div`
   padding: 40px;
   min-height: 100vh;
@@ -16,6 +17,10 @@ const YoniMassageContainer = styled.div`
   background-size: cover;
   background-position: center;
   color: #fff;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const Content = styled.div`
@@ -23,28 +28,44 @@ const Content = styled.div`
   padding: 30px;
   border-radius: 15px;
   max-width: 800px;
+  width: 90%;
   text-align: center;
   animation: ${fadeIn} 1s ease-in;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    width: 95%;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 20px;
   color: #ff6600;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const Button = styled.button`
   background-color: #ff6600;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 15px 30px;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 
   &:hover {
     background-color: #ff8533;
+    transform: translateY(-3px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px 25px;
+    font-size: 0.9rem;
   }
 `;
 
@@ -66,10 +87,16 @@ const ModalContent = styled.div`
   padding: 30px;
   border-radius: 15px;
   max-width: 600px;
+  width: 90%;
   max-height: 80vh;
   overflow-y: auto;
   color: #333;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    width: 95%;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -80,15 +107,22 @@ const CloseButton = styled.button`
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  color: #333;
 `;
 
 const ModalText = styled.p`
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 15px;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
+
 const YoniMassage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <YoniMassageContainer>
       <Content>
@@ -125,3 +159,4 @@ const YoniMassage = () => {
 };
 
 export default YoniMassage;
+

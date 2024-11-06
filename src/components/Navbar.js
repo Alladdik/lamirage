@@ -16,6 +16,11 @@ const Nav = styled.nav`
   padding: 0 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 10px;
+  }
 `;
 
 const NavContainer = styled.div`
@@ -24,10 +29,18 @@ const NavContainer = styled.div`
   align-items: center;
   max-width: 1200px;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Logo = styled.img`
   height: 60px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const NavItems = styled.ul`
@@ -35,10 +48,20 @@ const NavItems = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 const NavItem = styled.li`
   margin: 0 10px;
+
+  @media (max-width: 768px) {
+    margin: 5px 0;
+    width: 100%;
+  }
 `;
 
 const NavLink = styled(Link)`
@@ -82,6 +105,13 @@ const NavLink = styled(Link)`
     color: #ff6600;
     background: rgba(255, 102, 0, 0.2);
   }
+
+  @media (max-width: 768px) {
+    display: block;
+    text-align: center;
+    width: 100%;
+    border-radius: 0;
+  }
 `;
 
 const ContactButton = styled(NavLink)`
@@ -92,23 +122,47 @@ const ContactButton = styled(NavLink)`
     background: #ff8533;
     color: white;
   }
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
+const MenuToggle = styled.div`
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+`;
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <Nav>
       <NavContainer>
         <Link to="/">
           <Logo src="/logo.PNG" alt="La Mirage Studio Logo" />
         </Link>
-        <NavItems>
+        <MenuToggle onClick={toggleMenu}>
+          {isMenuOpen ? '✕' : '☰'}
+        </MenuToggle>
+        <NavItems style={{ display: isMenuOpen ? 'flex' : 'none' }}>
           <NavItem>
             <NavLink 
               to="/" 
               className={activeLink === 'home' ? 'active' : ''}
-              onClick={() => setActiveLink('home')}
+              onClick={() => { setActiveLink('home'); setIsMenuOpen(false); }}
             >
               Головна
             </NavLink>
@@ -117,7 +171,7 @@ const Navbar = () => {
             <NavLink 
               to="/massages" 
               className={activeLink === 'massages' ? 'active' : ''}
-              onClick={() => setActiveLink('massages')}
+              onClick={() => { setActiveLink('massages'); setIsMenuOpen(false); }}
             >
               Масажи
             </NavLink>
@@ -126,7 +180,7 @@ const Navbar = () => {
             <NavLink 
               to="/courses" 
               className={activeLink === 'courses' ? 'active' : ''}
-              onClick={() => setActiveLink('courses')}
+              onClick={() => { setActiveLink('courses'); setIsMenuOpen(false); }}
             >
               Курси
             </NavLink>
@@ -135,7 +189,7 @@ const Navbar = () => {
             <NavLink 
               to="/yoni-massage" 
               className={activeLink === 'yoni' ? 'active' : ''}
-              onClick={() => setActiveLink('yoni')}
+              onClick={() => { setActiveLink('yoni'); setIsMenuOpen(false); }}
             >
               Йоні масаж
             </NavLink>
@@ -144,7 +198,7 @@ const Navbar = () => {
             <ContactButton 
               to="/contact" 
               className={activeLink === 'contact' ? 'active' : ''}
-              onClick={() => setActiveLink('contact')}
+              onClick={() => { setActiveLink('contact'); setIsMenuOpen(false); }}
             >
               Контакти
             </ContactButton>
