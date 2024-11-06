@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    overflow-x: hidden;
+  }
+`;
 const fadeIn = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
+
 const MassagesContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -15,6 +21,7 @@ const MassagesContainer = styled.div`
   background-size: cover;
   color: #fff;
   padding: 20px;
+  overflow-x: hidden;
 `;
 
 const Title = styled.h1`
@@ -32,13 +39,14 @@ const Content = styled.div`
   width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   animation: ${fadeIn} 1s ease-in;
+  overflow-x: hidden;
 `;
 
 const MassageList = styled.ul`
   list-style-type: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 `;
 
@@ -82,6 +90,7 @@ const ModalContent = styled.div`
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
   animation: ${fadeIn} 0.3s ease-out;
 `;
@@ -134,34 +143,40 @@ const massageData = [
     price: "700 грн"
   }
 ];
+
 const Massages = () => {
   const [selectedMassage, setSelectedMassage] = useState(null);
+
   return (
-    <MassagesContainer>
-      <Content>
-        <Title>Наші масажі</Title>
-        <MassageList>
-          {massageData.map((massage, index) => (
-            <MassageItem key={index} onClick={() => setSelectedMassage(massage)}>
-              <MassageTitle>{massage.title}</MassageTitle>
-            </MassageItem>
-          ))}
-        </MassageList>
-      </Content>
-      {selectedMassage && (
-        <Modal onClick={() => setSelectedMassage(null)}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
-            <CloseButton onClick={() => setSelectedMassage(null)}>&times;</CloseButton>
-            <h2>{selectedMassage.title}</h2>
-            <p><strong>Опис:</strong> {selectedMassage.description}</p>
-            <p><strong>Тривалість:</strong> {selectedMassage.duration}</p>
-            <p><strong>Переваги:</strong> {selectedMassage.benefits}</p>
-            <p><strong>Ціна:</strong> {selectedMassage.price}</p>
-          </ModalContent>
-        </Modal>
-      )}
-    </MassagesContainer>
+    <>
+      <GlobalStyle />
+      <MassagesContainer>
+        <Content>
+          <Title>Наші масажі</Title>
+          <MassageList>
+            {massageData.map((massage, index) => (
+              <MassageItem key={index} onClick={() => setSelectedMassage(massage)}>
+                <MassageTitle>{massage.title}</MassageTitle>
+              </MassageItem>
+            ))}
+          </MassageList>
+        </Content>
+        {selectedMassage && (
+          <Modal onClick={() => setSelectedMassage(null)}>
+            <ModalContent onClick={(e) => e.stopPropagation()}>
+              <CloseButton onClick={() => setSelectedMassage(null)}>&times;</CloseButton>
+              <h2>{selectedMassage.title}</h2>
+              <p><strong>Опис:</strong> {selectedMassage.description}</p>
+              <p><strong>Тривалість:</strong> {selectedMassage.duration}</p>
+              <p><strong>Переваги:</strong> {selectedMassage.benefits}</p>
+              <p><strong>Ціна:</strong> {selectedMassage.price}</p>
+            </ModalContent>
+          </Modal>
+        )}
+      </MassagesContainer>
+    </>
   );
 };
 
 export default Massages;
+

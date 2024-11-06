@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    overflow-x: hidden;
+  }
+`;
 const fadeIn = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
+
 const CoursesContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -15,6 +21,7 @@ const CoursesContainer = styled.div`
   background-size: cover;
   color: #fff;
   padding: 20px;
+  overflow-x: hidden;
 `;
 
 const Title = styled.h1`
@@ -32,14 +39,16 @@ const Content = styled.div`
   width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   animation: ${fadeIn} 1s ease-in;
+  overflow-x: hidden;
 `;
 
 const CourseList = styled.ul`
   list-style-type: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
+  overflow-x: hidden;
 `;
 
 const CourseItem = styled.li`
@@ -82,6 +91,7 @@ const ModalContent = styled.div`
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
   animation: ${fadeIn} 0.3s ease-out;
 `;
@@ -134,33 +144,38 @@ const courseData = [
     price: "750 грн за сеанс"
   }
 ];
+
 const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
+
   return (
-    <CoursesContainer>
-      <Content>
-        <Title>Наші курси</Title>
-        <CourseList>
-          {courseData.map((course, index) => (
-            <CourseItem key={index} onClick={() => setSelectedCourse(course)}>
-              <CourseTitle>{course.title}</CourseTitle>
-            </CourseItem>
-          ))}
-        </CourseList>
-      </Content>
-      {selectedCourse && (
-        <Modal onClick={() => setSelectedCourse(null)}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
-            <CloseButton onClick={() => setSelectedCourse(null)}>&times;</CloseButton>
-            <h2>{selectedCourse.title}</h2>
-            <p><strong>Опис:</strong> {selectedCourse.description}</p>
-            <p><strong>Частини тіла:</strong> {selectedCourse.bodyParts}</p>
-            <p><strong>Переваги:</strong> {selectedCourse.benefits}</p>
-            <p><strong>Ціна:</strong> {selectedCourse.price}</p>
-          </ModalContent>
-        </Modal>
-      )}
-    </CoursesContainer>
+    <>
+      <GlobalStyle />
+      <CoursesContainer>
+        <Content>
+          <Title>Наші курси</Title>
+          <CourseList>
+            {courseData.map((course, index) => (
+              <CourseItem key={index} onClick={() => setSelectedCourse(course)}>
+                <CourseTitle>{course.title}</CourseTitle>
+              </CourseItem>
+            ))}
+          </CourseList>
+        </Content>
+        {selectedCourse && (
+          <Modal onClick={() => setSelectedCourse(null)}>
+            <ModalContent onClick={(e) => e.stopPropagation()}>
+              <CloseButton onClick={() => setSelectedCourse(null)}>&times;</CloseButton>
+              <h2>{selectedCourse.title}</h2>
+              <p><strong>Опис:</strong> {selectedCourse.description}</p>
+              <p><strong>Частини тіла:</strong> {selectedCourse.bodyParts}</p>
+              <p><strong>Переваги:</strong> {selectedCourse.benefits}</p>
+              <p><strong>Ціна:</strong> {selectedCourse.price}</p>
+            </ModalContent>
+          </Modal>
+        )}
+      </CoursesContainer>
+    </>
   );
 };
 
