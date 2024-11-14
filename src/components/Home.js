@@ -259,9 +259,9 @@ const Home = () => {
   ];
 
   const stats = [
-    { icon: <Users size={32} />, value: "500+", label: "Задоволених клієнток" },
-    { icon: <Heart size={32} />, value: "20", label: "Років досвіду" },
-    { icon: <Award size={32} />, value: "10+", label: "Сертифікатів" },
+    { icon: <Users size={32} />, value: "5000+", label: "Задоволених клієнток" },
+    { icon: <Heart size={32} />, value: "22", label: "Років досвіду" },
+    { icon: <Award size={32} />, value: "30+", label: "Сертифікатів" },
     { icon: <Star size={32} />, value: "5", label: "Рейтинг" }
   ];
 
