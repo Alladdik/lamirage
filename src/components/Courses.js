@@ -1,72 +1,153 @@
-import React, { useState } from 'react';
-import styled, { keyframes, createGlobalStyle } from 'styled-components';
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    overflow-x: hidden;
-  }
-`;
+import React from 'react';
+import { Sparkles, CheckCircle2, Heart, Star, Zap, BookOpen, Users, Mic } from 'lucide-react';
+import styled, { keyframes } from 'styled-components';
 const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
 
-const CoursesContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: url('/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  padding: 20px;
-  overflow-x: hidden;
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+`;
+
+const HeroSection = styled.section`
+  position: relative;
+  text-align: center;
+  padding: 4rem 0;
+  overflow: hidden;
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  border-radius: 15px;
+  margin-bottom: 3rem;
+  animation: ${fadeIn} 1s ease-out;
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
-  margin-bottom: 20px;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 3.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const Content = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 40px;
-  border-radius: 10px;
+const Subtitle = styled.h2`
+  font-size: 1.8rem;
+  color: #666;
+  margin-bottom: 2rem;
+`;
+
+const Description = styled.p`
+  font-size: 1.2rem;
+  color: #444;
   max-width: 800px;
-  width: 100%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  animation: ${fadeIn} 1s ease-in;
-  overflow-x: hidden;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
 `;
 
-const CourseList = styled.ul`
+const Emphasis = styled.p`
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ff4081;
+  background: linear-gradient(45deg, #ff4081, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.2);
+`;
+
+const PricingSection = styled.section`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  animation: ${fadeIn} 1s ease-out 0.6s both;
+`;
+
+const PricingCard = styled.div`
+  flex: 1;
+  min-width: 280px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  ${props => props.isPopular && `
+    border: 3px solid #ff4081;
+    position: relative;
+    &::before {
+      content: 'Популярний';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, #ff4081, #ff6b6b);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+  `}
+`;
+
+const PricingTitle = styled.h3`
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+`;
+
+const PricingPrice = styled.div`
+  font-size: 2.5rem;
+  color: #ff4081;
+  margin-bottom: 1rem;
+`;
+
+const OldPrice = styled.span`
+  text-decoration: line-through;
+  color: #999;
+  font-size: 1.8rem;
+  margin-right: 10px;
+`;
+
+const Discount = styled.span`
+  font-size: 1rem;
+  color: #4caf50;
+  font-weight: bold;
+`;
+
+const PricingFeatures = styled.ul`
   list-style-type: none;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow-x: hidden;
+  margin-bottom: 2rem;
 `;
 
-const CourseItem = styled.li`
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 8px;
+const PricingFeature = styled.li`
+  margin-bottom: 0.5rem;
+  color: #666;
+`;
+
+const Button = styled.button`
+  background: linear-gradient(45deg, #ff4081, #ff6b6b);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 30px;
   cursor: pointer;
-  transition: transform 0.3s, background-color 0.3s;
-
+  transition: all 0.3s ease;
   &:hover {
-    transform: translateY(-5px);
-    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
   }
-`;
-
-const CourseTitle = styled.h3`
-  font-size: 1.2rem;
-  margin-bottom: 10px;
 `;
 
 const Modal = styled.div`
@@ -75,7 +156,7 @@ const Modal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,101 +164,150 @@ const Modal = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background-color: #fff;
-  color: #333;
-  padding: 30px;
+  background: white;
+  padding: 2rem;
   border-radius: 15px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
-  animation: ${fadeIn} 0.3s ease-out;
+  text-align: center;
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+const FeatureList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+`;
+
+const FeatureItem = styled.li`
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
   color: #333;
-`;
+  transition: all 0.3s ease;
 
-const courseData = [
-  {
-    title: "Курс класичного масажу",
-    description: "Класичний масаж - це базова техніка, яка впливає на всі частини тіла. Він покращує кровообіг, знімає м'язову напругу та сприяє загальному розслабленню.",
-    bodyParts: "Спина, шия, руки, ноги, живіт",
-    benefits: "Зняття стресу, покращення гнучкості, полегшення болю",
-    price: "500 грн за сеанс"
-  },
-  {
-    title: "Курс тайського масажу",
-    description: "Тайський масаж поєднує акупресуру, розтяжку та елементи йоги. Він працює з енергетичними лініями тіла.",
-    bodyParts: "Все тіло, включаючи суглоби та м'язи",
-    benefits: "Підвищення гнучкості, покращення циркуляції енергії, зняття стресу",
-    price: "700 грн за сеанс"
-  },
-  {
-    title: "Курс лімфодренажного масажу",
-    description: "Лімфодренажний масаж спрямований на стимуляцію лімфатичної системи та виведення токсинів з організму.",
-    bodyParts: "Ноги, руки, живіт, обличчя",
-    benefits: "Зменшення набряків, покращення імунітету, детоксикація",
-    price: "600 грн за сеанс"
-  },
-  {
-    title: "Курс антицелюлітного масажу",
-    description: "Антицелюлітний масаж спрямований на боротьбу з целюлітом та покращення стану шкіри.",
-    bodyParts: "Стегна, сідниці, живіт",
-    benefits: "Зменшення целюліту, покращення тонусу шкіри, стимуляція кровообігу",
-    price: "650 грн за сеанс"
-  },
-  {
-    title: "Курс спортивного масажу",
-    description: "Спортивний масаж допомагає підготувати м'язи до фізичних навантажень та відновитися після них.",
-    bodyParts: "Залежно від виду спорту, але зазвичай ноги, спина, плечі",
-    benefits: "Підвищення продуктивності, швидше відновлення, профілактика травм",
-    price: "750 грн за сеанс"
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
-];
+
+  svg {
+    margin-right: 1rem;
+    color: #ff4081;
+  }
+`;
 
 const Courses = () => {
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleChoosePackage = () => {
+    window.open('https://t.me/myroslavarudenko', '_blank');
+  };
 
   return (
-    <>
-      <GlobalStyle />
-      <CoursesContainer>
-        <Content>
-          <Title>Наші курси</Title>
-          <CourseList>
-            {courseData.map((course, index) => (
-              <CourseItem key={index} onClick={() => setSelectedCourse(course)}>
-                <CourseTitle>{course.title}</CourseTitle>
-              </CourseItem>
-            ))}
-          </CourseList>
-        </Content>
-        {selectedCourse && (
-          <Modal onClick={() => setSelectedCourse(null)}>
-            <ModalContent onClick={(e) => e.stopPropagation()}>
-              <CloseButton onClick={() => setSelectedCourse(null)}>&times;</CloseButton>
-              <h2>{selectedCourse.title}</h2>
-              <p><strong>Опис:</strong> {selectedCourse.description}</p>
-              <p><strong>Частини тіла:</strong> {selectedCourse.bodyParts}</p>
-              <p><strong>Переваги:</strong> {selectedCourse.benefits}</p>
-              <p><strong>Ціна:</strong> {selectedCourse.price}</p>
-            </ModalContent>
-          </Modal>
-        )}
-      </CoursesContainer>
-    </>
+    <Container>
+      <HeroSection>
+        <Title>✨ Інтимний фітнес для лінивих ✨</Title>
+        <Subtitle>🌸 Для тих, хто прагне мати чудове жіноче здоров'я 🌸</Subtitle>
+        <Description>
+          Відкрийте для себе унікальний онлайн курс з інтимного фітнесу, який змінить ваше життя назавжди. 
+          Приготуйтеся до яскравих оргазмів 🎆, гармонійних стосунків 💑 та покращення жіночого здоров'я 💖. 
+          Ви готові притягувати гроші з усіх можливих джерел? 💰💰💰 Якщо ваша відповідь "Так!", 
+          то ця пропозиція створена саме для вас!
+        </Description>
+      </HeroSection>
+
+      <Emphasis>
+        Що вас очікує в нашій захоплюючій подорожі?
+      </Emphasis>
+
+      <FeatureList>
+        <FeatureItem><Sparkles size={24} /> 30 днів інтенсивного онлайн навчання</FeatureItem>
+        <FeatureItem><CheckCircle2 size={24} /> Понад 9 унікальних уроків з інтимного фітнесу</FeatureItem>
+        <FeatureItem><Zap size={24} /> Захоплюючий прямий ефір: розкрийте свою сексуальність, вивчіть секрети активного сексу та енергетичних практик</FeatureItem>
+        <FeatureItem><Heart size={24} /> Чуттєві сексуальні медитації</FeatureItem>
+        <FeatureItem><Star size={24} /> Ексклюзивний майстер-клас з орального мистецтва</FeatureItem>
+      </FeatureList>
+
+      <Emphasis>
+        Детальна програма курсу та ціни
+      </Emphasis>
+
+      <PricingSection>
+        <PricingCard>
+          <PricingTitle>Новачок</PricingTitle>
+          <PricingPrice>
+            <OldPrice>2550 грн</OldPrice>
+            1750 грн
+            <Discount> (Знижка 31%)</Discount>
+          </PricingPrice>
+          <PricingFeatures>
+            <PricingFeature><BookOpen size={18} /> 2-12 січня: 1 блок</PricingFeature>
+            <PricingFeature>- Заняття з інтимного фітнесу</PricingFeature>
+            <PricingFeature>- Знайомство з інтимними м'язами</PricingFeature>
+            <PricingFeature>- Безтренажерні та тренажерні методи</PricingFeature>
+            <PricingFeature>- Вправи при нетриманні сечі</PricingFeature>
+            <PricingFeature>Доступ до 1 блоку на 1 місяць</PricingFeature>
+          </PricingFeatures>
+          <Button onClick={handleChoosePackage}>Обрати пакет</Button>
+        </PricingCard>
+
+        <PricingCard>
+          <PricingTitle>Спокусниця</PricingTitle>
+          <PricingPrice>
+            <OldPrice>5500 грн</OldPrice>
+            3400 грн
+            <Discount> (Знижка 38%)</Discount>
+          </PricingPrice>
+          <PricingFeatures>
+            <PricingFeature><Users size={18} /> 12-22 січня: 2 блок (включає 1 блок)</PricingFeature>
+            <PricingFeature>- 3 нові заняття з інтимного фітнесу</PricingFeature>
+            <PricingFeature>- Вправи для підсилення чутливості і оргазму</PricingFeature>
+            <PricingFeature>- 2 медитації</PricingFeature>
+            <PricingFeature>- Доступ до ефіру та онлайн підтримка в телеграм</PricingFeature>
+            <PricingFeature>Доступ до 1-2 блоків</PricingFeature>
+          </PricingFeatures>
+          <Button onClick={handleChoosePackage}>Обрати пакет</Button>
+        </PricingCard>
+
+        <PricingCard isPopular>
+          <PricingTitle>Богиня оргазму</PricingTitle>
+          <PricingPrice>
+            <OldPrice>9500 грн</OldPrice>
+            5600 грн
+            <Discount> (Знижка 41%)</Discount>
+          </PricingPrice>
+          <PricingFeatures>
+            <PricingFeature><Mic size={18} /> 22 січня - 1 лютого: 3 блок (включає 1-2 блоки)</PricingFeature>
+            <PricingFeature>- 3 нові заняття по інтимному фітнесу для сексуального задоволення себе і партнера</PricingFeature>
+            <PricingFeature>- Додаткові медитації</PricingFeature>
+            <PricingFeature>- Індивідуальний урок-консультація зі мною (1 година)</PricingFeature>
+            <PricingFeature>- Семінар з орального мистецтва</PricingFeature>
+            <PricingFeature>Доступ до всіх 3 блоків на 3 місяці</PricingFeature>
+          </PricingFeatures>
+          <Button onClick={handleChoosePackage}>Обрати пакет</Button>
+        </PricingCard>
+      </PricingSection>
+
+      <Emphasis>
+        Не втрачайте шанс трансформувати своє життя! Приєднуйтесь до нашого курсу зараз і відкрийте двері до нового, захоплюючого світу жіночої сексуальності та здоров'я!
+      </Emphasis>
+
+      {showModal && (
+        <Modal>
+          <ModalContent>
+            <h2>Дякуємо за ваш вибір!</h2>
+            <p>Ми зв'яжемося з вами найближчим часом для оформлення замовлення.</p>
+            <Button onClick={() => setShowModal(false)}>Закрити</Button>
+          </ModalContent>
+        </Modal>
+      )}
+    </Container>
   );
 };
 
 export default Courses;
-
