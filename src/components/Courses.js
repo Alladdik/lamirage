@@ -200,6 +200,24 @@ const FeatureItem = styled.li`
     color: #ff4081;
   }
 `;
+const PricingFeatureList = styled.ul`
+  list-style-type: none;
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+`;
+
+const PricingFeatureItem = styled.li`
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  &:before {
+    content: "•";
+    color: #ff4081;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
+`;
 
 const Courses = () => {
   const [showModal, setShowModal] = React.useState(false);
@@ -211,7 +229,7 @@ const Courses = () => {
   return (
     <Container>
       <HeroSection>
-        <Title>✨ Інтимний фітнес для лінивих ✨</Title>
+        <Title>✨ Інтимний фітнес ✨</Title>
         <Subtitle>🌸 Для тих, хто прагне мати чудове жіноче здоров'я 🌸</Subtitle>
         <Description>
           Відкрийте для себе унікальний онлайн курс з інтимного фітнесу, який змінить ваше життя назавжди. 
@@ -222,13 +240,13 @@ const Courses = () => {
       </HeroSection>
 
       <Emphasis>
-        Що вас очікує в нашій захоплюючій подорожі?
+      Що Вас очікує на шляху по пізнанню себе і своєї сили
       </Emphasis>
 
       <FeatureList>
         <FeatureItem><Sparkles size={24} /> 30 днів інтенсивного онлайн навчання</FeatureItem>
-        <FeatureItem><CheckCircle2 size={24} /> Понад 9 унікальних уроків з інтимного фітнесу</FeatureItem>
-        <FeatureItem><Zap size={24} /> Захоплюючий прямий ефір: розкрийте свою сексуальність, вивчіть секрети активного сексу та енергетичних практик</FeatureItem>
+        <FeatureItem><CheckCircle2 size={24} />9 унікальних уроків з інтиного фітнесу</FeatureItem>
+        <FeatureItem><Zap size={24} /> Прямий ефір на відверті питання, блище знайомство зі своєю сексуальністю та багато іншого</FeatureItem>
         <FeatureItem><Heart size={24} /> Чуттєві сексуальні медитації</FeatureItem>
         <FeatureItem><Star size={24} /> Ексклюзивний майстер-клас з орального мистецтва</FeatureItem>
       </FeatureList>
@@ -241,17 +259,22 @@ const Courses = () => {
         <PricingCard>
           <PricingTitle>Новачок</PricingTitle>
           <PricingPrice>
-            <OldPrice>2550 грн</OldPrice>
-            1750 грн
-            <Discount> (Знижка 31%)</Discount>
+            <OldPrice>2600 грн</OldPrice>
+            1500 грн
           </PricingPrice>
           <PricingFeatures>
             <PricingFeature><BookOpen size={18} /> 2-12 січня: 1 блок</PricingFeature>
-            <PricingFeature>- Заняття з інтимного фітнесу</PricingFeature>
-            <PricingFeature>- Знайомство з інтимними м'язами</PricingFeature>
-            <PricingFeature>- Безтренажерні та тренажерні методи</PricingFeature>
-            <PricingFeature>- Вправи при нетриманні сечі</PricingFeature>
-            <PricingFeature>Доступ до 1 блоку на 1 місяць</PricingFeature>
+            <PricingFeature>3 Заняття з інтимного фітнесу:</PricingFeature>
+            <PricingFeatureList>
+              <PricingFeatureItem>Знайомство з інтимними м'язами</PricingFeatureItem>
+              <PricingFeatureItem>Тренажерна і безтренажерна методики</PricingFeatureItem>
+              <PricingFeatureItem>Заняття з вагінальним яєчком і без нього</PricingFeatureItem>
+              <PricingFeatureItem>Вправи при нетриманні сечі</PricingFeatureItem>
+            </PricingFeatureList>
+            <PricingFeature>Медитація</PricingFeature>
+            <PricingFeature>Доступ до ефіру</PricingFeature>
+            <PricingFeature>Чат підтримки</PricingFeature>
+            <PricingFeature><strong>Доступ 1 місяць</strong></PricingFeature>
           </PricingFeatures>
           <Button onClick={handleChoosePackage}>Обрати пакет</Button>
         </PricingCard>
@@ -260,16 +283,19 @@ const Courses = () => {
           <PricingTitle>Спокусниця</PricingTitle>
           <PricingPrice>
             <OldPrice>5500 грн</OldPrice>
-            3400 грн
-            <Discount> (Знижка 38%)</Discount>
+            3200 грн
           </PricingPrice>
           <PricingFeatures>
-            <PricingFeature><Users size={18} /> 12-22 січня: 2 блок (включає 1 блок)</PricingFeature>
-            <PricingFeature>- 3 нові заняття з інтимного фітнесу</PricingFeature>
-            <PricingFeature>- Вправи для підсилення чутливості і оргазму</PricingFeature>
-            <PricingFeature>- 2 медитації</PricingFeature>
-            <PricingFeature>- Доступ до ефіру та онлайн підтримка в телеграм</PricingFeature>
-            <PricingFeature>Доступ до 1-2 блоків</PricingFeature>
+            <PricingFeature><Users size={18} /> 12-22 січня: І блок</PricingFeature>
+            <PricingFeature>3 нові заняття з інтимного фітнесу:</PricingFeature>
+            <PricingFeatureList>
+              <PricingFeatureItem>Вправи для підсилення чутливості і оргазмічності</PricingFeatureItem>
+              <PricingFeatureItem>Хвиля Наулі (хвиля животом)</PricingFeatureItem>
+            </PricingFeatureList>
+            <PricingFeature>Медитації</PricingFeature>
+            <PricingFeature>Доступ до ефіру</PricingFeature>
+            <PricingFeature>Чат підтримки</PricingFeature>
+            <PricingFeature><strong>Доступ 2 місяці</strong></PricingFeature>
           </PricingFeatures>
           <Button onClick={handleChoosePackage}>Обрати пакет</Button>
         </PricingCard>
@@ -279,19 +305,24 @@ const Courses = () => {
           <PricingPrice>
             <OldPrice>9500 грн</OldPrice>
             5600 грн
-            <Discount> (Знижка 41%)</Discount>
           </PricingPrice>
           <PricingFeatures>
-            <PricingFeature><Mic size={18} /> 22 січня - 1 лютого: 3 блок (включає 1-2 блоки)</PricingFeature>
-            <PricingFeature>- 3 нові заняття по інтимному фітнесу для сексуального задоволення себе і партнера</PricingFeature>
-            <PricingFeature>- Додаткові медитації</PricingFeature>
-            <PricingFeature>- Індивідуальний урок-консультація зі мною (1 година)</PricingFeature>
-            <PricingFeature>- Семінар з орального мистецтва</PricingFeature>
-            <PricingFeature>Доступ до всіх 3 блоків на 3 місяці</PricingFeature>
+            <PricingFeature><Mic size={18} /> 22 січня - 1 лютого</PricingFeature>
+            <PricingFeature>І Блок + ІІ Блок</PricingFeature>
+            <PricingFeature>3 нові заняття з інтимного фітнесу:</PricingFeature>
+            <PricingFeatureList>
+              <PricingFeatureItem>Для сексуального задоволення себе і партнера</PricingFeatureItem>
+            </PricingFeatureList>
+            <PricingFeature>Медитації</PricingFeature>
+            <PricingFeature>Індивідуальний урок-консультація зі мною (1 година)</PricingFeature>
+            <PricingFeature>Семінар з орального мистецтва</PricingFeature>
+            <PricingFeature><strong>Доступ 3 місяці</strong></PricingFeature>
           </PricingFeatures>
           <Button onClick={handleChoosePackage}>Обрати пакет</Button>
         </PricingCard>
       </PricingSection>
+
+
 
       <Emphasis>
         Не втрачайте шанс трансформувати своє життя! Приєднуйтесь до нашого курсу зараз і відкрийте двері до нового, захоплюючого світу жіночої сексуальності та здоров'я!
