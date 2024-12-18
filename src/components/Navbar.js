@@ -153,6 +153,7 @@ const Navbar = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -197,15 +198,6 @@ const Navbar = () => {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink 
-              to="/yoni-massage" 
-              className={activeLink === 'yoni' ? 'active' : ''}
-              onClick={() => { setActiveLink('yoni'); setIsMenuOpen(false); }}
-            >
-              Йоні масаж
-            </NavLink>
-          </NavItem>
-          <NavItem>
             <ContactButton 
               to="/contact" 
               className={activeLink === 'contact' ? 'active' : ''}
@@ -221,4 +213,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
