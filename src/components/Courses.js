@@ -263,7 +263,7 @@ const Courses = () => {
             1500 грн
           </PricingPrice>
           <PricingFeatures>
-            <PricingFeature><BookOpen size={18} /> 2-12 січня: 1 блок</PricingFeature>
+            <PricingFeature><BookOpen size={18} /> 10-20 січня: І блок</PricingFeature>
             <PricingFeature>3 Заняття з інтимного фітнесу:</PricingFeature>
             <PricingFeatureList>
               <PricingFeatureItem>Знайомство з інтимними м'язами</PricingFeatureItem>
@@ -286,7 +286,8 @@ const Courses = () => {
             3200 грн
           </PricingPrice>
           <PricingFeatures>
-            <PricingFeature><Users size={18} /> 12-22 січня: І блок</PricingFeature>
+            <PricingFeature><Users size={18} /> 21-31 січня: ІІ блок</PricingFeature>
+            <PricingFeature>І + ІІ блок</PricingFeature>
             <PricingFeature>3 нові заняття з інтимного фітнесу:</PricingFeature>
             <PricingFeatureList>
               <PricingFeatureItem>Вправи для підсилення чутливості і оргазмічності</PricingFeatureItem>
@@ -307,8 +308,8 @@ const Courses = () => {
             5600 грн
           </PricingPrice>
           <PricingFeatures>
-            <PricingFeature><Mic size={18} /> 22 січня - 1 лютого</PricingFeature>
-            <PricingFeature>І Блок + ІІ Блок</PricingFeature>
+            <PricingFeature><Mic size={18} /> 31 січня - 10 лютого ІІІ блок </PricingFeature>
+            <PricingFeature>І Блок + ІІ Блок + ІІІ блок</PricingFeature>
             <PricingFeature>3 нові заняття з інтимного фітнесу:</PricingFeature>
             <PricingFeatureList>
               <PricingFeatureItem>Для сексуального задоволення себе і партнера</PricingFeatureItem>
