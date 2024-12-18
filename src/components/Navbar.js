@@ -185,7 +185,7 @@ const Navbar = () => {
               className={activeLink === 'massages' ? 'active' : ''}
               onClick={() => { setActiveLink('massages'); setIsMenuOpen(false); }}
             >
-              Тренражери
+              Тренажери
             </NavLink>
           </NavItem>
           <NavItem>
