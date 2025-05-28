@@ -37,8 +37,8 @@
   width: 100%;
   max-width: 950px; // Трохи вужче для концентрації
   background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.75); // Збільшено прозорість для кращого ефекту скла
-  backdrop-filter: blur(16px); // Сильніший блюр
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(4px); // Сильніший блюр
+  -webkit-backdrop-filter: blur(4px);
   padding: 3rem;
   border-radius: 28px; // Більше заокруглення
   border: 1px solid var(--bubble-border);
@@ -114,8 +114,8 @@
 
 .benefit-card {
   background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.6);
-  backdrop-filter: blur(8px); // Легкий блюр всередині картки
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px); // Легкий блюр всередині картки
+  -webkit-backdrop-filter: blur(4px);
   padding: 2.5rem 2rem; // Збільшено падінги
   border-radius: 20px;
   text-align: center;

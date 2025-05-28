@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Award, Users, Star, Instagram, X, BookOpen, MessageSquare, Sparkles, Shield, Zap, Quote, ChevronDown, ChevronUp, Gift, Sun, Moon } from 'lucide-react';
+import Preloader from './Preloader/Preloader'; // <--- ДОДАНО: Імпорт Preloader (перевір шлях!)
 import './Home.scss';
 
 const Home = () => {
@@ -10,13 +11,17 @@ const Home = () => {
 
   // Ефект паралаксу для фону (залишаємо)
   useEffect(() => {
+    const overlay = document.querySelector('.home-background-overlay');
+    // Додана перевірка, чи елемент існує, перед маніпуляцією
+    if (!overlay) {
+        // console.warn('.home-background-overlay not found for parallax effect.');
+        return;
+    }
+    
     const handleMouseMove = (e) => {
-      const overlay = document.querySelector('.home-background-overlay');
-      if (overlay) {
-        const x = (e.clientX - window.innerWidth / 2) * -0.015;
-        const y = (e.clientY - window.innerHeight / 2) * -0.015;
-        overlay.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
-      }
+      const x = (e.clientX - window.innerWidth / 2) * -0.015;
+      const y = (e.clientY - window.innerHeight / 2) * -0.015;
+      overlay.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
@@ -83,13 +88,13 @@ const Home = () => {
     {
       id: 2,
       text: "Ніколи не думала, що моє тіло здатне на такі яскраві відчуття. Курс з інтимного фітнесу — це найкраща інвестиція в себе та свої стосунки. Мирослава — справжній професіонал і дуже чутлива людина.",
-      author: "",
+      author: "", 
       stars: 5
     },
     {
       id: 3,
       text: "Дельта Вортекс – це щось космічне! Таких глибоких трансформацій я не відчувала ніде. Мирослава майстерно веде через процес, і результати просто вражають. Знайшла нову роботу і гармонію в сім'ї!",
-      author: "",
+      author: "", 
       stars: 5
     }
   ];
@@ -98,8 +103,20 @@ const Home = () => {
     setExpandedService(expandedService === id ? null : id);
   };
 
+  // Плавний скрол до секції при кліку (залишаємо, хоча кнопка була видалена з JSX)
+  // Якщо кнопка повернеться, ця функція буде потрібна.
+  const scrollToStats = () => {
+     const statsSection = document.getElementById('stats-section');
+     if (statsSection) { // Перевірка, чи елемент існує
+        statsSection.scrollIntoView({ behavior: 'smooth' });
+     }
+  };
+
+
   return (
     <>
+      <Preloader minDisplayTime={1200} /> {/* Ось тут ми додаємо Preloader */}
+      
       <div className="home-container">
         <div className="home-background-overlay" />
         <div className="home-content-wrapper">
@@ -117,13 +134,15 @@ const Home = () => {
               <h2 className="services-preview-title">Мої ключові напрямки:</h2>
               {servicesData.map(service => (
                 <div key={service.id} className="service-preview-item">
-                  <div className="service-preview-header" onClick={() => toggleServiceDescription(service.id)}>
+                  <div className="service-preview-header" onClick={() => toggleServiceDescription(service.id)} aria-expanded={expandedService === service.id} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && toggleServiceDescription(service.id)}>
                     {service.icon}
                     <span>{service.name} - <span className="service-short-desc">{service.short_desc}</span></span>
                     {expandedService === service.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                   </div>
                   {expandedService === service.id && (
-                    <p className="service-full-desc">{service.full_desc}</p>
+                    <div className="service-full-desc-wrapper"> {/* Додано обгортку для кращої анімації */}
+                        <p className="service-full-desc">{service.full_desc}</p>
+                    </div>
                   )}
                 </div>
               ))}
@@ -136,6 +155,12 @@ const Home = () => {
                 <button className="about-me-button main-cta-button" onClick={() => setIsModalOpen(true)}>
                     Моя Історія та Місія
                 </button>
+                {/* Кнопка скролу була видалена, але функція scrollToStats залишена про всяк випадок */}
+                {/* Якщо захочеш повернути кнопку, розкоментуй:
+                <button className="scroll-down-button" onClick={scrollToStats} aria-label="Дізнатись більше">
+                     ↓
+                </button>
+                */}
             </div>
           </section>
 
@@ -158,7 +183,7 @@ const Home = () => {
             <h2 className="section-title">Історії Трансформацій Моїх Клієнток</h2>
             <div className="testimonial-wrapper">
               {testimonials.map((testimonial) => (
-                <div className="testimonial-card" key={testimonial.id} style={{ animationDelay: `${testimonial.id * 0.1}s` }}>
+                <div className="testimonial-card" key={testimonial.id} style={{ animationDelay: `${testimonial.id * 0.12}s` }}> {/* Трохи збільшив затримку для плавності */}
                   <Quote className="testimonial-quote-icon" />
                   <div className="testimonial-stars">
                       {[...Array(testimonial.stars)].map((_, i) => <Star key={i} size={18} className="star-filled"/>)}
@@ -175,7 +200,7 @@ const Home = () => {
           <section className="cta-section">
             <h2 className="section-title">Зроби Крок до Нової Себе:</h2>
             <div className="cta-grid">
-                <div className="cta-card">
+                <div className="cta-card" style={{ animationDelay: "0.1s" }}>
                   <div className="cta-icon"><BookOpen size={36}/></div>
                   <h3 className="cta-title">Авторські Курси та Програми</h3>
                   <p className="cta-description">
@@ -183,7 +208,7 @@ const Home = () => {
                   </p>
                   <Link to="/courses" className="cta-button">Дізнатися більше про курси</Link>
                 </div>
-                <div className="cta-card">
+                <div className="cta-card" style={{ animationDelay: "0.2s" }}>
                   <div className="cta-icon"><MessageSquare size={36}/></div>
                   <h3 className="cta-title">Особиста Консультація</h3>
                   <p className="cta-description">
@@ -191,7 +216,7 @@ const Home = () => {
                   </p>
                   <Link to="/contact" className="cta-button">Записатися на консультацію</Link>
                 </div>
-                <div className="cta-card cta-card-special">
+                <div className="cta-card cta-card-special" style={{ animationDelay: "0.3s" }}>
                   <div className="cta-icon"><Gift size={36}/></div>
                   <h3 className="cta-title">Енергія як Подарунок</h3>
                   <p className="cta-description">
@@ -210,7 +235,7 @@ const Home = () => {
       {isModalOpen && (
         <div className="about-modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="about-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-modal-button" onClick={() => setIsModalOpen(false)}>
+            <button className="close-modal-button" onClick={() => setIsModalOpen(false)} aria-label="Закрити модальне вікно">
               <X size={28} />
             </button>
             <img src="/me.png" alt="Мирослава Руденко" className="modal-profile-image"/>

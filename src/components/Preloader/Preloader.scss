@@ -1,0 +1,92 @@
+// Використовуємо змінні з твого App.scss
+// :root {
+//   --dark-bg: #0A0A0A;
+//   --primary-color: #ff6600;
+//   --text-color: #f0f0f0;
+// }
+
+.preloader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; // Найвищий z-index
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out; // Плавне зникнення
+  
+    &.preloader-hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  
+  .preloader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .preloader-logo-pulsing {
+    margin-bottom: 2rem;
+    img {
+      width: 80px; // Або розмір твого лого
+      height: auto;
+      animation: pulseLogo 2s infinite ease-in-out;
+    }
+  }
+  
+  @keyframes pulseLogo {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+  
+  .preloader-dots {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  
+    .dot {
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      animation: bounceDots 1.4s infinite ease-in-out both;
+  
+      &:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+      &:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+    }
+  }
+  
+  @keyframes bounceDots {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1.0);
+    }
+  }
+  
+  .preloader-text {
+    color: var(--text-color-darker);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
