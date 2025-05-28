@@ -1,344 +1,93 @@
 import React from 'react';
-import { Sparkles, CheckCircle2, Heart, Star, Zap, BookOpen, Users, Mic } from 'lucide-react';
-import styled, { keyframes } from 'styled-components';
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-`;
-
-const HeroSection = styled.section`
-  position: relative;
-  text-align: center;
-  padding: 4rem 0;
-  overflow: hidden;
-  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  border-radius: 15px;
-  margin-bottom: 3rem;
-  animation: ${fadeIn} 1s ease-out;
-`;
-
-const Title = styled.h1`
-  font-size: 3.5rem;
-  color: #333;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const Subtitle = styled.h2`
-  font-size: 1.8rem;
-  color: #666;
-  margin-bottom: 2rem;
-`;
-
-const Description = styled.p`
-  font-size: 1.2rem;
-  color: #444;
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
-`;
-
-const Emphasis = styled.p`
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #ff4081;
-  background: linear-gradient(45deg, #ff4081, #ff6b6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.2);
-`;
-
-const PricingSection = styled.section`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  animation: ${fadeIn} 1s ease-out 0.6s both;
-`;
-
-const PricingCard = styled.div`
-  flex: 1;
-  min-width: 280px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  }
-  ${props => props.isPopular && `
-    border: 3px solid #ff4081;
-    position: relative;
-    &::before {
-      content: 'Популярний';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(45deg, #ff4081, #ff6b6b);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-  `}
-`;
-
-const PricingTitle = styled.h3`
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 1rem;
-`;
-
-const PricingPrice = styled.div`
-  font-size: 2.5rem;
-  color: #ff4081;
-  margin-bottom: 1rem;
-`;
-
-const OldPrice = styled.span`
-  text-decoration: line-through;
-  color: #999;
-  font-size: 1.8rem;
-  margin-right: 10px;
-`;
-
-const Discount = styled.span`
-  font-size: 1rem;
-  color: #4caf50;
-  font-weight: bold;
-`;
-
-const PricingFeatures = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 2rem;
-`;
-
-const PricingFeature = styled.li`
-  margin-bottom: 0.5rem;
-  color: #666;
-`;
-
-const Button = styled.button`
-  background: linear-gradient(45deg, #ff4081, #ff6b6b);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
-  }
-`;
-
-const Modal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  text-align: center;
-`;
-
-const FeatureList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 2rem 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-`;
-
-const FeatureItem = styled.li`
-  background: white;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-  color: #333;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  svg {
-    margin-right: 1rem;
-    color: #ff4081;
-  }
-`;
-const PricingFeatureList = styled.ul`
-  list-style-type: none;
-  padding-left: 1rem;
-  margin: 0.5rem 0;
-`;
-
-const PricingFeatureItem = styled.li`
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-  &:before {
-    content: "•";
-    color: #ff4081;
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
-  }
-`;
+import { Sparkles, CheckCircle2, Heart, Star, Zap, Gift, Clock, TrendingUp } from 'lucide-react';
+import './Courses.scss'; // Переконайся, що SCSS файл підключений
 
 const Courses = () => {
-  const [showModal, setShowModal] = React.useState(false);
-
-  const handleChoosePackage = () => {
+  const handleEarlyBirdSignUp = () => {
+    // Можна відкривати телеграм або іншу форму для запису
     window.open('https://t.me/myroslavarudenko', '_blank');
   };
 
+  const generalFeatures = [
+    { icon: <Sparkles size={24} />, text: "Трансформаційні знання та практики" },
+    { icon: <CheckCircle2 size={24} />, text: "Унікальні авторські методики" },
+    { icon: <Zap size={24} />, text: "Потужний заряд енергії та натхнення" },
+    { icon: <Heart size={24} />, text: "Глибоке з'єднання з власною чуттєвістю" },
+    { icon: <Star size={24} />, text: "Ексклюзивні матеріали та підтримка" }
+  ];
+
   return (
-    <Container>
-      <HeroSection>
-        <Title>✨ Інтимний фітнес ✨</Title>
-        <Subtitle>🌸 Для тих, хто прагне мати чудове жіноче здоров'я 🌸</Subtitle>
-        <Description>
-          Відкрийте для себе унікальний онлайн курс з інтимного фітнесу, який змінить ваше життя назавжди. 
-          Приготуйтеся до яскравих оргазмів 🎆, гармонійних стосунків 💑 та покращення жіночого здоров'я 💖. 
-          Ви готові притягувати гроші з усіх можливих джерел? 💰💰💰 Якщо ваша відповідь "Так!", 
-          то ця пропозиція створена саме для вас!
-        </Description>
-      </HeroSection>
+    <div className="courses-page-container">
+      <div className="courses-wrapper">
+        {/* --- HERO СЕКЦІЯ --- */}
+        <section className="courses-hero-section">
+          <div className="hero-icon-flare">✨</div>
+          <h1 className="courses-title">Курси від Мирослави Руденко</h1>
+          <h2 className="courses-subtitle">Подорож до Себе: Здоров'я, Енергія, Насолода</h2>
+          <p className="courses-description">
+            Мої курси — це не просто інформація. Це глибокий трансформаційний досвід, що поєднує мудрість давніх практик із сучасними знаннями про тіло та енергію. Разом ми розкриємо твій потенціал, повернемо радість життя та наповнимо кожен день усвідомленістю та задоволенням.
+          </p>
+        </section>
 
-      <Emphasis>
-      Що Вас очікує на шляху по пізнанню себе і своєї сили
-      </Emphasis>
+        {/* --- ЗАГАЛЬНІ ПЕРЕВАГИ КУРСІВ --- */}
+        <section className="courses-features-section">
+          <h3 className="section-heading courses-section-heading">Що ти отримаєш на моїх програмах:</h3>
+          <div className="feature-list">
+            {generalFeatures.map((feature, index) => (
+              <div className="feature-item" key={index} style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="feature-icon-bubble">{feature.icon}</div>
+                <span>{feature.text}</span>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <FeatureList>
-        <FeatureItem><Sparkles size={24} /> 30 днів інтенсивного онлайн навчання</FeatureItem>
-        <FeatureItem><CheckCircle2 size={24} />9 унікальних уроків з інтиного фітнесу</FeatureItem>
-        <FeatureItem><Zap size={24} /> Прямий ефір на відверті питання, блище знайомство зі своєю сексуальністю та багато іншого</FeatureItem>
-        <FeatureItem><Heart size={24} /> Чуттєві сексуальні медитації</FeatureItem>
-        <FeatureItem><Star size={24} /> Ексклюзивний майстер-клас з орального мистецтва</FeatureItem>
-      </FeatureList>
+        {/* --- СЕКЦІЯ "СКОРО В ПРОДАЖІ" ТА "РАННІЙ ДОСТУП" --- */}
+        <section className="early-bird-section">
+          <div className="early-bird-content-wrapper">
+            <div className="coming-soon-badge">
+              <Clock size={20} />
+              <span>СТАРТ ПРОДАЖІВ НЕЗАБАРОМ</span>
+            </div>
+            <h3 className="section-heading early-bird-heading">🔥 Стань Першою та Отримай Найкраще!</h3>
+            <p className="early-bird-description">
+              Повна програма моїх унікальних курсів зараз на фінальній стадії підготовки. Я вкладаю всю свою душу та досвід, щоб дати тобі максимум цінності.
+              Хочеш отримати доступ до ексклюзивних умов, найкращої ціни та приємних бонусів раніше за всіх?
+            </p>
+            
+            <div className="early-bird-offer-card">
+              <div className="offer-icon">
+                <Gift size={40} />
+              </div>
+              <h4>Пакет "Рання Пташка"</h4>
+              <p className="offer-details">
+                Залиш заявку на ранній доступ та отримай:
+              </p>
+              <ul className="offer-benefits">
+                <li><TrendingUp size={18} /> Найнижчу ціну, яка буде недоступна після офіційного старту.</li>
+                <li><Star size={18} /> Додаткові бонусні матеріали та медитації.</li>
+                <li><Sparkles size={18} /> Першочерговий доступ до курсу та закритий чат.</li>
+              </ul>
+              <div className="early-bird-pricing">
+                <span className="early-price">від 1200 грн</span>
+                <span className="original-price-note">(замість стандартної ціни від 2000 грн)</span>
+              </div>
+              <button className="early-bird-button" onClick={handleEarlyBirdSignUp}>
+                Хочу Ранній Доступ!
+              </button>
+            </div>
+             <p className="early-bird-note">
+                Кількість місць за спеціальною пропозицією буде обмежена. Не пропусти свій шанс!
+             </p>
+          </div>
+        </section>
 
-      <Emphasis>
-        Детальна програма курсу та ціни
-      </Emphasis>
-
-      <PricingSection>
-        <PricingCard>
-          <PricingTitle>Новачок</PricingTitle>
-          <PricingPrice>
-            <OldPrice>2600 грн</OldPrice>
-            1500 грн
-          </PricingPrice>
-          <PricingFeatures>
-            <PricingFeature><BookOpen size={18} /> 10-20 січня: І блок</PricingFeature>
-            <PricingFeature>3 Заняття з інтимного фітнесу:</PricingFeature>
-            <PricingFeatureList>
-              <PricingFeatureItem>Знайомство з інтимними м'язами</PricingFeatureItem>
-              <PricingFeatureItem>Тренажерна і безтренажерна методики</PricingFeatureItem>
-              <PricingFeatureItem>Заняття з вагінальним яєчком і без нього</PricingFeatureItem>
-              <PricingFeatureItem>Вправи при нетриманні сечі</PricingFeatureItem>
-            </PricingFeatureList>
-            <PricingFeature>Медитація</PricingFeature>
-            <PricingFeature>Доступ до ефіру</PricingFeature>
-            <PricingFeature>Чат підтримки</PricingFeature>
-            <PricingFeature><strong>Доступ 1 місяць</strong></PricingFeature>
-          </PricingFeatures>
-          <Button onClick={handleChoosePackage}>Обрати пакет</Button>
-        </PricingCard>
-
-        <PricingCard>
-          <PricingTitle>Спокусниця</PricingTitle>
-          <PricingPrice>
-            <OldPrice>5500 грн</OldPrice>
-            3200 грн
-          </PricingPrice>
-          <PricingFeatures>
-            <PricingFeature><Users size={18} /> 21-31 січня: ІІ блок</PricingFeature>
-            <PricingFeature>І + ІІ блок</PricingFeature>
-            <PricingFeature>3 нові заняття з інтимного фітнесу:</PricingFeature>
-            <PricingFeatureList>
-              <PricingFeatureItem>Вправи для підсилення чутливості і оргазмічності</PricingFeatureItem>
-              <PricingFeatureItem>Хвиля Наулі (хвиля животом)</PricingFeatureItem>
-            </PricingFeatureList>
-            <PricingFeature>Медитації</PricingFeature>
-            <PricingFeature>Доступ до ефіру</PricingFeature>
-            <PricingFeature>Чат підтримки</PricingFeature>
-            <PricingFeature><strong>Доступ 2 місяці</strong></PricingFeature>
-          </PricingFeatures>
-          <Button onClick={handleChoosePackage}>Обрати пакет</Button>
-        </PricingCard>
-
-        <PricingCard isPopular>
-          <PricingTitle>Богиня оргазму</PricingTitle>
-          <PricingPrice>
-            <OldPrice>9500 грн</OldPrice>
-            5600 грн
-          </PricingPrice>
-          <PricingFeatures>
-            <PricingFeature><Mic size={18} /> 31 січня - 10 лютого ІІІ блок </PricingFeature>
-            <PricingFeature>І Блок + ІІ Блок + ІІІ блок</PricingFeature>
-            <PricingFeature>3 нові заняття з інтимного фітнесу:</PricingFeature>
-            <PricingFeatureList>
-              <PricingFeatureItem>Для сексуального задоволення себе і партнера</PricingFeatureItem>
-            </PricingFeatureList>
-            <PricingFeature>Медитації</PricingFeature>
-            <PricingFeature>Індивідуальний урок-консультація зі мною (1 година)</PricingFeature>
-            <PricingFeature>Семінар з орального мистецтва</PricingFeature>
-            <PricingFeature><strong>Доступ 3 місяці</strong></PricingFeature>
-          </PricingFeatures>
-          <Button onClick={handleChoosePackage}>Обрати пакет</Button>
-        </PricingCard>
-      </PricingSection>
-
-
-
-      <Emphasis>
-        Не втрачайте шанс трансформувати своє життя! Приєднуйтесь до нашого курсу зараз і відкрийте двері до нового, захоплюючого світу жіночої сексуальності та здоров'я!
-      </Emphasis>
-
-      {showModal && (
-        <Modal>
-          <ModalContent>
-            <h2>Дякуємо за ваш вибір!</h2>
-            <p>Ми зв'яжемося з вами найближчим часом для оформлення замовлення.</p>
-            <Button onClick={() => setShowModal(false)}>Закрити</Button>
-          </ModalContent>
-        </Modal>
-      )}
-    </Container>
+        {/* --- ФІНАЛЬНИЙ ЗАКЛИК --- */}
+        <section className="courses-final-call">
+          <p>Мої курси – це інвестиція у твоє щасливе, здорове та наповнене життя. Я з нетерпінням чекаю, щоб поділитися з тобою цими знаннями та провести тебе шляхом неймовірних трансформацій!</p>
+        </section>
+      </div>
+    </div>
   );
 };
 

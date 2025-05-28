@@ -1,0 +1,250 @@
+// --- Глобальні змінні з App.scss використовуються ---
+// (переконайся, що в тебе є App.scss з :root змінними)
+
+.massages-page-container {
+  min-height: calc(100vh - 80px); // 80px - висота Navbar
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  padding: 5rem 1.5rem 4rem; // Збільшено верхній відступ
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--dark-bg); // Базовий фон
+
+  &::before { // Анімований фон "Аврора"
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(ellipse at 10% 20%, rgba(var(--primary-color-rgb, 255, 102, 0), 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(var(--secondary-color-rgb, 255, 51, 102), 0.12) 0%, transparent 50%),
+      linear-gradient(170deg, var(--dark-bg) 35%, var(--dark-bg-secondary) 100%);
+    background-size: 220% 220%, 220% 220%, 100% 100%;
+    animation: auroraMassagesMovement 28s ease-in-out infinite alternate;
+    z-index: 0;
+    opacity: 0.9;
+  }
+}
+@keyframes auroraMassagesMovement {
+  0% { background-position: 0% 50%, 100% 50%, center; }
+  100% { background-position: 100% 50%, 0% 50%, center; }
+}
+
+.massages-content-wrapper {
+  width: 100%;
+  max-width: 950px; // Трохи вужче для концентрації
+  background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.75); // Збільшено прозорість для кращого ефекту скла
+  backdrop-filter: blur(16px); // Сильніший блюр
+  -webkit-backdrop-filter: blur(16px);
+  padding: 3rem;
+  border-radius: 28px; // Більше заокруглення
+  border: 1px solid var(--bubble-border);
+  animation: fadeInMassagesContent 1s ease-out 0.2s forwards;
+  opacity: 0;
+  transform: translateY(25px);
+  box-shadow: 0 15px 45px rgba(0,0,0,0.3); // Глибша тінь
+  position: relative; // Для z-index
+  z-index: 1;
+}
+
+@keyframes fadeInMassagesContent {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// --- Загальний стиль для заголовків секцій ---
+.section-title { // Якщо ти визначив його глобально в App.scss, можна цей блок прибрати
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff; // Яскравіший білий
+  margin-bottom: 3rem; // Збільшено відступ
+  position: relative;
+  padding-bottom: 1rem;
+  letter-spacing: 0.2px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb, 255, 102, 0), 0.5);
+  }
+}
+
+// --- Вступна секція ---
+.massages-intro {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.massages-main-title {
+  font-size: 3rem;
+  font-weight: 800; // Жирніше
+  margin-bottom: 1.5rem;
+  color: var(--primary-color); // Акцентний колір
+  letter-spacing: -0.5px;
+}
+
+.massages-description {
+  font-size: 1.15rem; // Трохи більший
+  line-height: 1.8; // Збільшено для кращої читабельності
+  color: var(--text-color); // Світліший текст
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+// --- Секція переваг ---
+.benefits-section {
+  margin-bottom: 4rem;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // Адаптивні колонки
+  gap: 2rem; // Збільшено відстань
+}
+
+.benefit-card {
+  background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.6);
+  backdrop-filter: blur(8px); // Легкий блюр всередині картки
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2.5rem 2rem; // Збільшено падінги
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(var(--bubble-border-rgb, 255,255,255), 0.08);
+  transition: all 0.35s ease-out;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  animation: popInBenefitCard 0.5s ease-out forwards;
+  opacity: 0; transform: scale(0.95);
+  
+  &:hover {
+    transform: translateY(-10px) scale(1.03);
+    border-color: rgba(var(--primary-color-rgb, 255, 102, 0), 0.5);
+    background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.8);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+  }
+}
+// Анімація для карток переваг (поява)
+@for $i from 1 through 4 {
+    .benefit-card:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1 + 0.3}s; // Затримка залежить від індексу + загальна затримка секції
+    }
+}
+@keyframes popInBenefitCard { to { opacity: 1; transform: scale(1); } }
+
+
+.benefit-icon {
+  // Обгортка для іконки, щоб вона була більшою та виразнішою
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  width: 64px; // Збільшено
+  height: 64px;
+  border-radius: 18px; // Squircle
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem; // Центрування та відступ
+  box-shadow: 0 5px 15px rgba(var(--primary-color-rgb, 255, 102, 0), 0.25);
+  transition: transform 0.3s ease;
+
+  .benefit-card:hover & {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  svg {
+    width: 32px; // Розмір іконки всередині обгортки
+    height: 32px;
+  }
+}
+
+.benefit-title {
+  font-size: 1.3rem; // Трохи менше
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.benefit-text {
+  font-size: 0.95rem; // Трохи менше
+  color: var(--text-color-darker);
+  line-height: 1.7;
+}
+
+// --- Секція галереї ---
+.gallery-section {
+    animation: fadeInContent 0.8s ease-out 1s forwards; // Затримка появи
+    opacity: 0;
+}
+
+.image-gallery {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr); // Залишаємо 2 колонки
+  
+  .large-card {
+    grid-column: span 2; // Велика картка займає 2 колонки
+    @media (max-width: 768px) {
+        grid-column: span 1; // На мобільних одна колонка
+    }
+  }
+}
+
+.image-card-massages {
+  overflow: hidden;
+  border-radius: 24px; // Більше заокруглення
+  box-shadow: 0 12px 35px rgba(var(--bubble-shadow-rgb, 0,0,0), 0.25); // М'якша тінь
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  position: relative; // Для псевдо-елементів
+
+  &::after { // Додаємо легкий градієнтний оверлей для глибини
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 40%);
+    opacity: 0.7;
+    transition: opacity 0.4s ease;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); // Плавніший зум
+  }
+  
+  &:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 18px 45px rgba(var(--bubble-shadow-rgb, 0,0,0), 0.3);
+    &::after { opacity: 0.3; }
+    img { transform: scale(1.1); }
+  }
+}
+
+// --- Адаптивність ---
+@media (max-width: 992px) {
+    .massages-content-wrapper { padding: 2.5rem; }
+    .section-title { font-size: 2rem; }
+    .massages-main-title { font-size: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .massages-page-container { padding: 4rem 1rem 3rem; }
+  .massages-content-wrapper { padding: 2rem 1.5rem; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .image-gallery { grid-template-columns: 1fr; }
+  .massages-main-title { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+    .benefit-card { padding: 2rem 1.5rem; }
+    .benefit-title { font-size: 1.2rem; }
+}

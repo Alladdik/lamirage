@@ -1,0 +1,329 @@
+// --- Глобальні змінні з App.scss використовуються ---
+// (переконайся, що в тебе є App.scss з :root змінними)
+
+.courses-page-container {
+  padding: 5rem 1.5rem 4rem; // Збільшено верхній відступ
+  background: linear-gradient(170deg, var(--dark-bg) 20%, #1a1218 70%, var(--dark-bg-secondary) 100%);
+  overflow-x: hidden;
+  min-height: calc(100vh - 80px); // 80px - висота Navbar
+}
+
+.courses-wrapper {
+  max-width: 900px; // Трохи вужче для кращої фокусації на контенті
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; // Відстань між секціями
+}
+
+// --- Загальний стиль для заголовків секцій (використовуємо з Home.scss або визначаємо тут) ---
+.courses-section-heading, .section-heading { // Уніфіковано
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff; // Змінено на білий для кращого контрасту на темному фоні
+  margin-bottom: 2.5rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+  letter-spacing: 0.3px;
+  animation: fadeInText 1s ease-out forwards;
+  opacity: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+    box-shadow: 0 0 12px rgba(var(--primary-color-rgb, 255, 102, 0), 0.6);
+  }
+}
+@keyframes fadeInText { to { opacity: 1; } }
+
+
+// --- HERO СЕКЦІЯ ---
+.courses-hero-section {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--bubble-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 28px; // Більш виражене заокруглення
+  border: 1px solid var(--bubble-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: fadeInCoursesHero 1s ease-out 0.2s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+
+  .hero-icon-flare {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: flarePulse 2s infinite ease-in-out;
+  }
+}
+@keyframes flarePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+@keyframes fadeInCoursesHero {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.courses-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
+}
+
+.courses-subtitle {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.courses-description {
+  font-size: 1.15rem;
+  color: var(--text-color-darker);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+// --- СЕКЦІЯ "ЩО ТИ ОТРИМАЄШ" ---
+.courses-features-section {
+  animation: fadeInContent 0.8s ease-out 0.5s forwards;
+  opacity: 0;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-item {
+  background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.7); // Зробив трохи менш прозорим
+  padding: 1.8rem 1.5rem; // Змінено падінги
+  border-radius: 20px;
+  border: 1px solid var(--bubble-border);
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; // Збільшено відстань
+  font-size: 1.05rem;
+  color: var(--text-color);
+  transition: all 0.35s ease-out;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  animation: popInFeatureItem 0.5s ease-out forwards;
+  opacity: 0; transform: scale(0.95);
+  
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(var(--primary-color-rgb, 255, 102, 0), 0.4);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.85);
+  }
+  
+  .feature-icon-bubble { // Обертка для іконки
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    width: 48px; // Збільшено
+    height: 48px;
+    border-radius: 16px; // Squircle
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(var(--primary-color-rgb, 255, 102, 0), 0.2);
+  }
+}
+@keyframes popInFeatureItem {
+  to { opacity: 1; transform: scale(1); }
+}
+
+// --- СЕКЦІЯ РАННЬОГО ДОСТУПУ ---
+.early-bird-section {
+  background: var(--bubble-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 28px;
+  padding: 3rem 2.5rem;
+  border: 1px solid var(--bubble-border);
+  text-align: center;
+  animation: fadeInContent 0.8s ease-out 0.8s forwards;
+  opacity: 0;
+}
+
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(var(--primary-color-rgb, 255, 102, 0), 0.3);
+}
+
+.early-bird-heading {
+  // Використовує .courses-section-heading, але можемо додати специфічні зміни
+  font-size: 2.2rem; // Трохи менший
+  color: #fff;
+  margin-bottom: 1rem;
+  &::after { // Прибираємо лінію, щоб не дублювати
+    display: none;
+  }
+}
+
+.early-bird-description {
+  font-size: 1.1rem;
+  color: var(--text-color-darker);
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.early-bird-offer-card {
+  background: var(--dark-bg-secondary); // Контрастний фон
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 0 auto 2rem;
+  max-width: 550px;
+  border: 1px solid rgba(var(--primary-color-rgb, 255, 102, 0), 0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+  .offer-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px; // Squircle
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 5px 15px rgba(var(--primary-color-rgb, 255, 102, 0), 0.3);
+    svg { width: 30px; height: 30px; }
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+  .offer-details {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+  
+  .offer-benefits {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    li {
+      color: var(--text-color-darker);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      svg {
+        color: var(--primary-color-light);
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+.early-bird-pricing {
+  margin-bottom: 1.5rem;
+  .early-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+  }
+  .original-price-note {
+    font-size: 0.9rem;
+    color: var(--text-color-darker);
+  }
+}
+
+.early-bird-button {
+  background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 5px 20px rgba(var(--secondary-color-rgb, 255, 51, 102), 0.3);
+  
+  &:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(var(--secondary-color-rgb, 255, 51, 102), 0.4);
+  }
+}
+
+.early-bird-note {
+    font-size: 0.9rem;
+    color: var(--text-color-darker);
+    margin-top: 1rem;
+}
+
+// --- ФІНАЛЬНИЙ ЗАКЛИК ---
+.courses-final-call {
+  text-align: center;
+  padding: 2.5rem 1.5rem; // Збільшено падінги
+  background: var(--bubble-bg);
+  border-radius: 20px;
+  border: 1px solid var(--bubble-border);
+  margin-top: 1rem; // Зменшено відступ, бо секція "скоро" вже має свій
+  animation: fadeInContent 0.8s ease-out 1.1s forwards;
+  opacity: 0;
+  
+  p {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-color);
+    max-width: 750px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+}
+
+// --- АДАПТИВНІСТЬ ---
+@media (max-width: 992px) {
+  .courses-wrapper { gap: 3rem; }
+  .pricing-grid { // Цей клас більше не використовується, але залишаю для майбутнього
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .courses-page-container { padding: 4rem 1rem 3rem; }
+  .courses-title { font-size: 2.5rem; }
+  .courses-subtitle { font-size: 1.2rem; }
+  .courses-section-heading, .early-bird-heading { font-size: 1.8rem; }
+  .feature-list { grid-template-columns: 1fr; } // Одна колонка для фіч на мобілках
+  .early-bird-section { padding: 2.5rem 1.5rem; }
+  .early-bird-offer-card { padding: 1.5rem; }
+}

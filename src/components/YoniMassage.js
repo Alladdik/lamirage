@@ -1,248 +1,94 @@
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import { ChevronDown, Heart, Shield, Sun, Droplets, GitCommit } from 'lucide-react';
+import './YoniMassage.scss';
 
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`;
-
-const YoniMassageContainer = styled.div`
-  padding: 40px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-image: url('/background.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-
-  @media (max-width: 768px) {
-    padding: 20px;
-  }
-`;
-
-const Content = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 800px;
-  width: 90%;
-  text-align: center;
-  animation: ${fadeIn} 1s ease-in;
-
-  @media (max-width: 768px) {
-    padding: 20px;
-    width: 95%;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #ff6600;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
-const Button = styled.button`
-  background-color: #ff6600;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 1rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  margin: 10px;
-
-  &:hover {
-    background-color: #ff8533;
-    transform: translateY(-3px);
-  }
-
-  @media (max-width: 768px) {
-    padding: 12px 25px;
-    font-size: 0.9rem;
-  }
-`;
-
-const Modal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
-
-const ModalContent = styled.div`
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  color: #333;
-  position: relative;
-
-  @media (max-width: 768px) {
-    padding: 20px;
-    width: 95%;
-  }
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
-`;
-
-const ModalText = styled.p`
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 15px;
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const ModalSubtitle = styled.h3`
-  font-size: 1.2rem;
-  color: #ff6600;
-  margin-top: 20px;
-  margin-bottom: 10px;
-`;
 const YoniMassage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState('');
+  const [openAccordion, setOpenAccordion] = useState('what');
 
-  const openModal = (content) => {
-    setModalContent(content);
-    setIsModalOpen(true);
+  const toggleAccordion = (id) => {
+    setOpenAccordion(openAccordion === id ? null : id);
   };
-  return (
-    <YoniMassageContainer>
-      <Content>
-        <Title>Йоні масаж</Title>
-        <Button onClick={() => openModal('what')}>
-          Що таке йоні масаж?
-        </Button>
-        <Button onClick={() => openModal('benefits')}>
-          Переваги йоні масажу
-        </Button>
-        <Button onClick={() => openModal('expect')}>
-          Чого очікувати?
-        </Button>
-        <Button onClick={() => openModal('precautions')}>
-          Застереження
-        </Button>
-      </Content>
 
-      {isModalOpen && (
-        <Modal>
-          <ModalContent>
-            <CloseButton onClick={() => setIsModalOpen(false)}>&times;</CloseButton>
-            {modalContent === 'what' && (
-              <>
-                <ModalSubtitle>Що таке йоні масаж?</ModalSubtitle>
-                <ModalText>
-                  Йоні - це санскритське слово, що означає піхву, яка символізує богиню Шакті в індуїзмі. «Йоні» можна перекласти як «священна печера» або «священний простір».
-                </ModalText>
-                <ModalText>
-                  Східна культура подарувала світові знання про тантричний секс, Лінгам і Йоні. Тантра являє собою досконалу систему духовних і фізичних практик з напрямком сексуального бажання в розвиток духовної складової людини і оздоровлення організму.
-                </ModalText>
-                <ModalText>
-                  Згідно тантрик, кожен чоловік і кожна жінка - божественні істоти. Масаж Йоні допомагає досягти свого божественного начала через розслаблення і отримання задоволення.🔥🧚🏻‍♀️
-                </ModalText>
-              </>
-            )}
-            {modalContent === 'benefits' && (
-              <>
-                <ModalSubtitle>Переваги йоні масажу</ModalSubtitle>
-                <ModalText>
-                  1. Покращення сексуального здоров'я та задоволення
-                </ModalText>
-                <ModalText>
-                  2. Зняття емоційних блоків та травм
-                </ModalText>
-                <ModalText>
-                  3. Підвищення чутливості та усвідомленості тіла
-                </ModalText>
-                <ModalText>
-                  4. Поліпшення кровообігу в тазовій області
-                </ModalText>
-                <ModalText>
-                  5. Зміцнення м'язів тазового дна
-                </ModalText>
-                <ModalText>
-                  6. Допомога у лікуванні сексуальних дисфункцій
-                </ModalText>
-              </>
-            )}
-            {modalContent === 'expect' && (
-              <>
-                <ModalSubtitle>Чого очікувати від йоні масажу?</ModalSubtitle>
-                <ModalText>
-                  1. Початкова консультація та обговорення ваших цілей та меж
-                </ModalText>
-                <ModalText>
-                  2. Розслаблююча атмосфера з м'яким освітленням та музикою
-                </ModalText>
-                <ModalText>
-                  3. Поступовий початок з масажу всього тіла
-                </ModalText>
-                <ModalText>
-                  4. Ніжний масаж зовнішніх та внутрішніх частин йоні
-                </ModalText>
-                <ModalText>
-                  5. Фокус на диханні та усвідомленості відчуттів
-                </ModalText>
-                <ModalText>
-                  6. Можливість емоційного вивільнення
-                </ModalText>
-              </>
-            )}
-            {modalContent === 'precautions' && (
-              <>
-                <ModalSubtitle>Застереження</ModalSubtitle>
-                <ModalText>
-                  1. Йоні масаж не рекомендується під час вагітності або менструації
-                </ModalText>
-                <ModalText>
-                  2. Повідомте масажиста про будь-які інфекції або захворювання
-                </ModalText>
-                <ModalText>
-                  3. Масаж повинен проводитися тільки кваліфікованим спеціалістом
-                </ModalText>
-                <ModalText>
-                  4. Ви маєте право зупинити сеанс в будь-який момент
-                </ModalText>
-                <ModalText>
-                  5. Обов'язково обговоріть свої очікування та межі перед початком сеансу
-                </ModalText>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
-      )}
-    </YoniMassageContainer>
+  const accordionData = [
+    {
+      id: 'what',
+      icon: <Heart />,
+      title: 'Що таке Йоні Масаж?',
+      content: [
+        "Йоні (Yoni) — це санскритське слово, що з любов'ю та повагою означає жіночі геніталії. Його перекладають як «священний простір» або «джерело життя». Це не просто частина тіла, а центр жіночої енергії, інтуїції та творчості.",
+        "Йоні масаж — це глибока, чуттєва та терапевтична практика, що поєднує ніжний дотик, дихання та свідому увагу. Його мета — не лише фізичне задоволення, а й зцілення емоційних блоків, звільнення від стресу та пробудження вашої природної сексуальної енергії. Це подорож до самопізнання та прийняття свого тіла."
+      ]
+    },
+    {
+      id: 'benefits',
+      icon: <Sun />,
+      title: 'Які переваги я отримаю?',
+      content: [
+        "<strong>Пробудження чуттєвості:</strong> Поверніть яскраві фарби у своє сексуальне життя та відкрийте нові грані оргазму.",
+        "<strong>Емоційне зцілення:</strong> Звільніться від старих образ, страхів та негативного досвіду, що зберігаються в тілі.",
+        "<strong>Зміцнення здоров'я:</strong> Покращується кровообіг в органах малого тазу, що позитивно впливає на жіноче здоров'я.",
+        "<strong>Прийняття себе:</strong> Навчіться любити та приймати своє тіло таким, яке воно є, з усією його унікальною красою.",
+        "<strong>Гармонія у стосунках:</strong> Глибше розуміння своєї сексуальності позитивно впливає на близькість з партнером."
+      ]
+    },
+    {
+      id: 'expect',
+      icon: <Droplets />,
+      title: 'Чого очікувати під час сеансу?',
+      content: [
+        "Сеанс проходить в атмосфері повної довіри, безпеки та конфіденційності. Усе починається з розмови, де ми обговорюємо ваші очікування та встановлюємо межі.",
+        "Процес включає розслаблюючий масаж усього тіла, щоб зняти напругу, і лише потім, з вашої повної згоди, майстер переходить до ніжного та шанобливого масажу зони йоні. Основна увага приділяється вашому комфорту, диханню та відчуттям."
+      ]
+    },
+    {
+      id: 'precautions',
+      icon: <Shield />,
+      title: 'Безпека та протипоказання',
+      content: [
+        "Ваша безпека — мій головний пріоритет. Я маю всі необхідні сертифікати та дотримуюсь найвищих стандартів гігієни.",
+        "<strong>Протипоказання:</strong> менструація, вагітність, гострі запальні процеси органів малого тазу, інфекції, що передаються статевим шляхом. Якщо у вас є сумніви, краще проконсультуватися."
+      ]
+    }
+  ];
+
+  return (
+    <div className="yoni-page-container">
+      <div className="yoni-hero">
+        <div className="yoni-hero-overlay"></div>
+        <div className="yoni-hero-content">
+          <h1 className="yoni-main-title">Мистецтво Йоні Масажу</h1>
+          <p className="yoni-subtitle">Шлях до пробудження жіночої енергії, чуттєвості та глибокого зцілення</p>
+        </div>
+      </div>
+
+      <div className="yoni-content-wrapper">
+        <div className="yoni-intro-text">
+            <GitCommit className="intro-icon" />
+            <p>
+                Ця сторінка — ваш гід у світ тантричної практики, яка допомагає жінкам по-новому відкрити себе, своє тіло та свою неймовірну внутрішню силу. Дізнайтеся більше про те, як ця священна подорож може змінити ваше життя.
+            </p>
+        </div>
+        <div className="accordion-container">
+          {accordionData.map(item => (
+            <div key={item.id} className="accordion-item">
+              <button className="accordion-header" onClick={() => toggleAccordion(item.id)}>
+                <div className="header-icon">{item.icon}</div>
+                <span className="header-title">{item.title}</span>
+                <ChevronDown className={`chevron-icon ${openAccordion === item.id ? 'open' : ''}`} />
+              </button>
+              <div className={`accordion-content ${openAccordion === item.id ? 'open' : ''}`}>
+                <div className="content-inner">
+                  {item.content.map((p, index) => (
+                    <p key={index} dangerouslySetInnerHTML={{ __html: p }}></p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default YoniMassage;
-

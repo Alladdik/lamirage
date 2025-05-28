@@ -1,22 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar'; // Припускаю, що Navbar теж в components
 import Home from './components/Home';
 import Massages from './components/Massages';
 import Courses from './components/Courses';
 import YoniMassage from './components/YoniMassage';
 import Contact from './components/Contact';
-import styled from 'styled-components';
-
-const AppContainer = styled.div`
-  padding-top: 80px; // Щоб контент не перекривався з Navbar
-`;
+import './App.scss'; // Імпортуємо глобальні стилі
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <AppContainer>
+      <main className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/massages" element={<Massages />} />
@@ -24,7 +20,7 @@ function App() {
           <Route path="/yoni-massage" element={<YoniMassage />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </AppContainer>
+      </main>
     </Router>
   );
 }

@@ -1,0 +1,57 @@
+/* Глобальні змінні та стилі */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-color: #ff6600;
+  --primary-color-light: #ff8533;
+  --secondary-color: #ff3366;
+  
+  --dark-bg: #0A0A0A;
+  --dark-bg-secondary: #141414;
+  
+  --text-color: #f0f0f0;
+  --text-color-darker: #a0a0a0;
+  
+  --bubble-bg: rgba(30, 30, 30, 0.5);
+  --bubble-border: rgba(255, 255, 255, 0.1);
+  --bubble-shadow: rgba(0, 0, 0, 0.3);
+  
+  --font-main: 'Manrope', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* Плавний скрол */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Стилізація скролбару */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color-light);
+}
+
+.app-container {
+  padding-top: 80px; // Висота Navbar
+}

@@ -1,0 +1,214 @@
+// --- Глобальні змінні з App.scss використовуються ---
+
+.contact-copy-notification {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #4CAF50, #66BB6A); // Градієнт для успіху
+  color: white;
+  padding: 1rem 2rem; // Збільшено
+  border-radius: 16px; // Більш заокруглено
+  animation: fade-in-out-contact 2.8s ease-in-out; // Трохи довше
+  z-index: 2000;
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4); // Тінь в колір
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg { // Якщо б ти хотів додати іконку галочки
+    margin-right: 0.3rem;
+  }
+}
+
+@keyframes fade-in-out-contact {
+  0% { opacity: 0; transform: translate(-50%, -25px) scale(0.95); }
+  15% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  85% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -25px) scale(0.95); }
+}
+
+.contact-page-container {
+  padding: 5rem 1.5rem 4rem;
+  min-height: calc(100vh - 80px); // 80px - висота Navbar
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; // Важливо для ::before псевдо-елемента
+  background-color: var(--dark-bg); // Базовий колір, якщо градієнт не завантажиться
+
+  &::before { // Анімований фон "Аврора"
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(ellipse at 20% 80%, rgba(var(--primary-color-rgb, 255, 102, 0), 0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 40%, rgba(var(--secondary-color-rgb, 255, 51, 102), 0.18) 0%, transparent 50%),
+      linear-gradient(170deg, var(--dark-bg) 40%, var(--dark-bg-secondary) 100%);
+    background-size: 250% 250%, 250% 250%, 100% 100%;
+    animation: auroraContactMovement 30s ease-in-out infinite alternate;
+    z-index: 0;
+    opacity: 0.8;
+  }
+}
+@keyframes auroraContactMovement {
+  0% { background-position: 0% 100%, 100% 0%, center; }
+  100% { background-position: 100% 0%, 0% 100%, center; }
+}
+
+
+.contact-card-wrapper {
+  background: var(--bubble-bg);
+  backdrop-filter: blur(15px); // Сильніший блюр
+  -webkit-backdrop-filter: blur(15px);
+  padding: 3rem;
+  border-radius: 28px; // Більше заокруглення
+  max-width: 650px; // Трохи вужче для елегантності
+  width: 100%;
+  text-align: center;
+  animation: fadeInContactCard 1s ease-out 0.2s forwards;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  border: 1px solid var(--bubble-border);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3); // Глибша тінь
+  position: relative; // Для z-index
+  z-index: 1;
+}
+
+@keyframes fadeInContactCard {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.contact-main-title {
+  font-size: 2.6rem; // Трохи менший для балансу
+  margin-bottom: 0.75rem; // Менший відступ
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.contact-main-subtitle {
+  font-size: 1.15rem; // Трохи менший
+  color: var(--text-color-darker);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.contact-items-grid {
+  display: grid;
+  grid-template-columns: 1fr; // Одна колонка
+  gap: 1rem; // Відстань між елементами
+}
+
+.contact-item-bubble {
+  display: flex;
+  align-items: center;
+  padding: 1.3rem 1.8rem; // Збільшено падінги
+  background-color: rgba(var(--bubble-bg-rgb, 30,30,30), 0.7); // Трохи менш прозорий для читабельності
+  color: white;
+  text-decoration: none;
+  border-radius: 20px; // Більш "iOS" заокруглення
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1); // Плавніший transition
+  border: 1px solid var(--bubble-border);
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden; // Для ефекту світла
+
+  &::before { // Ефект світла при наведенні
+    content: '';
+    position: absolute;
+    top: 0; left: -150%; // Початково за межами
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease-out;
+  }
+  
+  .contact-icon {
+    font-size: 2.2rem; // Трохи менші іконки
+    margin-right: 1.2rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1; // Щоб іконка була над ефектом світла
+  }
+  
+  .contact-text-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    
+    strong {
+      font-size: 1.05rem; // Трохи менше
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.1rem;
+    }
+    span {
+      font-size: 0.85rem;
+      color: var(--text-color-darker);
+    }
+  }
+
+  .contact-copy-icon {
+    margin-left: auto;
+    font-size: 1.3rem;
+    color: var(--text-color-darker);
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-color: rgba(var(--primary-color-rgb, 255,102,0), 0.4);
+    background-color: rgba(var(--bubble-bg-rgb, 30,30,30), 0.9);
+
+    &::before {
+        left: 120%; // Рухаємо світло через картку
+    }
+
+    .contact-icon {
+      transform: scale(1.1) rotate(-5deg); // Додаємо легкий поворот
+    }
+
+    .contact-copy-icon {
+      color: var(--primary-color);
+      transform: scale(1.1);
+    }
+  }
+  
+  // Специфічні кольори для іконок
+  &.instagram { .contact-icon { color: #E4405F; } }
+  &.instagram-personal { .contact-icon { color: #C13584; } }
+  &.telegram { .contact-icon { color: #24A1DE; } }
+  &.phone { .contact-icon { color: #25D366; } }
+}
+
+@media (max-width: 768px) {
+    .contact-page-container { padding: 4rem 1rem 3rem; }
+    .contact-card-wrapper { padding: 2rem 1.5rem; max-width: 100%; }
+    .contact-main-title { font-size: 2.2rem; }
+    .contact-main-subtitle { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+    .contact-item-bubble {
+        padding: 1rem 1.2rem;
+        .contact-icon {
+            font-size: 1.8rem;
+            margin-right: 1rem;
+        }
+        .contact-text-content strong { font-size: 0.95rem; }
+        .contact-text-content span { font-size: 0.8rem; }
+    }
+}

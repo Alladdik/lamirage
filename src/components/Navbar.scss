@@ -1,0 +1,149 @@
+.navbar {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  
+    &.scrolled {
+      background: rgba(10, 10, 10, 0.8);
+      border-bottom: 1px solid var(--bubble-border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 1400px;
+    width: 100%;
+    padding: 0 24px;
+  }
+  
+  .navbar-logo {
+    cursor: pointer;
+    img {
+      height: 55px;
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    height: 80px;
+  }
+  
+  .nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+  
+    &.active {
+      color: var(--primary-color);
+      background: rgba(255, 102, 0, 0.1);
+    }
+  
+    &:hover:not(.active) {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .contact-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-color-light));
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.2);
+  
+    &:hover,
+    &.active {
+      background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color));
+      color: white !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 102, 0, 0.3);
+    }
+  }
+  
+  .menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-color);
+  }
+  
+  // Адаптивність для мобільних пристроїв
+  @media screen and (max-width: 960px) {
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 4rem;
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      background: #0A0A0A;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  
+      &.active {
+        left: 0;
+      }
+    }
+  
+    .nav-item {
+      width: 80%;
+      height: auto;
+    }
+  
+    .nav-link {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      text-align: center;
+      border-radius: 15px;
+    }
+    
+    .contact-button {
+      padding: 1.2rem;
+    }
+  
+    .menu-toggle {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      transform: translateY(-50%);
+      z-index: 1000; // Щоб був над усім
+    }
+  }

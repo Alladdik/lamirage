@@ -1,0 +1,253 @@
+// --- Глобальні змінні з App.scss використовуються ---
+// (переконайся, що в тебе є App.scss з :root змінними)
+
+.yoni-page-container {
+  background-color: var(--dark-bg);
+  padding-bottom: 5rem; // Збільшено відступ знизу
+  overflow-x: hidden;
+}
+
+// --- HERO СЕКЦІЯ ---
+.yoni-hero {
+  position: relative;
+  height: 65vh; // Трохи вище
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  // background-image: url('/background.jpg'); // Закоментовано, будемо використовувати градієнт
+  background-size: cover;
+  background-position: center 60%; // Трохи нижче центр для кращої композиції
+  background-attachment: fixed; // Залишаємо для паралаксу
+  color: #fff;
+  
+  // Новий градієнтний фон для Hero
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+      radial-gradient(ellipse at 50% 70%, rgba(var(--secondary-color-rgb, 255,51,102), 0.25) 0%, transparent 50%),
+      linear-gradient(180deg, rgba(var(--dark-bg-rgb,10,10,10), 0.1) 0%, rgba(var(--dark-bg-rgb,10,10,10), 0.9) 80%, var(--dark-bg) 100%);
+    z-index: 1;
+    animation: subtleShine 15s ease-in-out infinite alternate;
+  }
+}
+@keyframes subtleShine {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+.yoni-hero-overlay { // Цей оверлей вже не потрібен, якщо використовуємо ::before
+  // position: absolute;
+  // top: 0; left: 0; width: 100%; height: 100%;
+  // background: linear-gradient(to top, var(--dark-bg) 0%, rgba(10, 10, 10, 0.5) 50%, var(--dark-bg) 100%);
+}
+
+.yoni-hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeInYoniHero 1.2s ease-out 0.3s forwards; // Плавніша і з затримкою
+  opacity: 0; transform: translateY(20px);
+  padding: 0 1.5rem;
+}
+@keyframes fadeInYoniHero {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.yoni-main-title {
+  font-size: 3.2rem; // Трохи скориговано
+  font-weight: 800;
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); // Глибша тінь
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+  color: #fff; // Яскравіший білий
+}
+
+.yoni-subtitle {
+  font-size: 1.3rem; // Трохи менше
+  font-weight: 400;
+  color: var(--text-color-darker);
+  max-width: 650px; // Трохи вужче
+  line-height: 1.6;
+}
+
+// --- ОСНОВНИЙ КОНТЕНТ З АКОРДЕОНОМ ---
+.yoni-content-wrapper {
+  max-width: 850px; // Звужено для кращої читабельності довгого тексту
+  margin: -6rem auto 0; // Більший негативний відступ для накладання на hero
+  position: relative;
+  z-index: 3;
+  padding: 0 1.5rem;
+  animation: slideUpYoniContent 1s ease-out 0.6s forwards;
+  opacity: 0; transform: translateY(30px);
+}
+@keyframes slideUpYoniContent {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.yoni-intro-text {
+  background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.8);
+  backdrop-filter: blur(15px); // Сильніший блюр
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 24px; // Більше заокруглення
+  padding: 2.5rem; // Більше падінгів
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--bubble-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+  font-size: 1.15rem; // Трохи більший текст
+  line-height: 1.8;
+  color: var(--text-color);
+  
+  .intro-icon {
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    width: 48px; // Збільшено
+    height: 48px;
+    background: rgba(var(--primary-color-rgb,255,102,0), 0.1);
+    border-radius: 50%;
+    padding: 8px;
+  }
+}
+
+.accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; // Залишаємо
+}
+
+.accordion-item {
+  background: var(--bubble-bg);
+  border-radius: 20px;
+  border: 1px solid var(--bubble-border);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; // Важливо для анімації контенту
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+  &:hover {
+    background: rgba(var(--bubble-bg-rgb, 30,30,30), 0.9); // Менш прозорий при наведенні
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 1.8rem; // Збільшено падінги
+  background: transparent; // Фон тепер на .accordion-item
+  border: none;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  gap: 1.2rem; // Збільшено відстань
+  position: relative; // Для ::after елемента (лінія підсвітки)
+
+  &::after { // Лінія підсвітки при наведенні або активності
+    content: '';
+    position: absolute;
+    left: 1.8rem;
+    bottom: 0;
+    height: 2px;
+    width: calc(100% - 3.6rem); // Ширина мінус падінги
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover::after,
+  &[aria-expanded="true"]::after {
+    transform: scaleX(1);
+  }
+}
+
+.header-icon {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  min-width: 44px; // Фіксована ширина
+  width: 44px;
+  height: 44px;
+  border-radius: 14px; // Squircle
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(var(--primary-color-rgb, 255,102,0),0.2);
+  transition: transform 0.3s ease;
+
+  .accordion-header:hover & {
+    transform: scale(1.1);
+  }
+
+  svg { width: 24px; height: 24px; }
+}
+
+.header-title {
+  font-size: 1.25rem; // Збільшено
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.chevron-icon {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); // Більш "жива" анімація
+  color: var(--text-color-darker);
+  
+  &.open { // Стиль для відкритого стану (JS додає клас .open)
+    transform: rotate(180deg);
+    color: var(--primary-color);
+  }
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.5s ease 0.1s, 
+              transform 0.5s ease 0.1s;
+
+  &.open { // Стиль для відкритого стану (JS додає клас .open)
+    max-height: 600px; // Збільшено для більшого контенту
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-inner {
+  padding: 0.5rem 2rem 2rem calc(1.8rem + 44px + 1.2rem); // Динамічний відступ на основі іконки
+  font-size: 1.05rem; // Трохи менший для балансу
+  line-height: 1.75;
+  color: var(--text-color-darker);
+
+  p {
+    margin-bottom: 1.2rem;
+    &:last-child { margin-bottom: 0; }
+  }
+  
+  strong {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+}
+
+// Адаптивність
+@media (max-width: 768px) {
+  .yoni-hero { height: 55vh; }
+  .yoni-main-title { font-size: 2.2rem; }
+  .yoni-subtitle { font-size: 1.1rem; }
+  .yoni-content-wrapper { margin-top: -4rem; padding: 0 1rem;}
+  .yoni-intro-text { padding: 2rem 1.5rem; font-size: 1.05rem; }
+  .header-title { font-size: 1.1rem; }
+  .accordion-header { padding: 1.2rem 1.5rem; gap: 1rem;}
+  .header-icon { min-width: 40px; width: 40px; height: 40px; svg {width: 20px; height: 20px;}}
+  .content-inner { padding: 0.5rem 1.5rem 1.5rem 1.5rem; font-size: 1rem;} // Прибираємо великий відступ на мобілках
+}
+
+@media (max-width: 480px) {
+    .yoni-main-title { font-size: 2rem; }
+    .yoni-subtitle { font-size: 1rem; }
+}
