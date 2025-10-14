@@ -243,8 +243,6 @@ const Courses = () => {
               <div className="new-price">1111 ₴</div>
             </div>
             <div className="price-discount">
-              <span className="discount-badge">-56% знижка</span>
-              <span className="save-text">Ви економите 1389 грн</span>
             </div>
           </div>
 
