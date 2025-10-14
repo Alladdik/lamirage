@@ -6,13 +6,12 @@ import Massages from './components/Massages';
 import Courses from './components/Courses';
 import YoniMassage from './components/YoniMassage';
 import Contact from './components/Contact';
-import './App.scss'; // Імпортуємо глобальні стилі
+import './App.scss';
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <main className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/massages" element={<Massages />} />
@@ -20,7 +19,6 @@ function App() {
           <Route path="/yoni-massage" element={<YoniMassage />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </main>
     </Router>
   );
 }
