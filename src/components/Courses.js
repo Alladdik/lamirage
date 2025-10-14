@@ -13,7 +13,8 @@ import {
   CreditCard,
   Smartphone,
   Send,
-  Lock
+  Lock,
+  Tag
 } from 'lucide-react';
 import './Courses.scss';
 
@@ -228,8 +229,23 @@ const Courses = () => {
 
         <section id="payment" className="payment-section">
           <div className="section-head">
-            <h3>Реквізити для оплати</h3>
-            <p>Оберіть зручний банк та перейдіть до оплати. Після оплати, скиньте мені, будь ласка, скрін.</p>
+            <h3>Приєднатися до челенджу</h3>
+            <p>Оберіть зручний банк для оплати. Після переказу скиньте, будь ласка, скрін в Telegram.</p>
+          </div>
+
+          <div className="price-showcase">
+            <div className="price-badge-top">
+              <Tag size={20} />
+              <span>Спеціальна ціна</span>
+            </div>
+            <div className="price-container">
+              <div className="old-price">2500 ₴</div>
+              <div className="new-price">1111 ₴</div>
+            </div>
+            <div className="price-discount">
+              <span className="discount-badge">-56% знижка</span>
+              <span className="save-text">Ви економите 1389 грн</span>
+            </div>
           </div>
 
           <div className="payment-cards">
@@ -248,6 +264,10 @@ const Courses = () => {
                   {copiedKey === 'mono' ? <Check size={18} /> : <Copy size={18} />}
                 </button>
               </div>
+              <div className="card-amount">
+                <span className="amount-label">Сума до сплати:</span>
+                <span className="amount-value">1111 ₴</span>
+              </div>
             </div>
 
             <div className="payment-card">
@@ -264,6 +284,10 @@ const Courses = () => {
                 >
                   {copiedKey === 'privat' ? <Check size={18} /> : <Copy size={18} />}
                 </button>
+              </div>
+              <div className="card-amount">
+                <span className="amount-label">Сума до сплати:</span>
+                <span className="amount-value">1111 ₴</span>
               </div>
             </div>
           </div>
